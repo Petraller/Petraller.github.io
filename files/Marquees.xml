@@ -1,0 +1,98 @@
+<marquees>
+    <marquee type="language">
+        <item name="C#">
+            C# was picked up in 2015 in conjunction with Unity. C# has since become the language with
+            the highest proficiency, having been used in most developed games, simple console applications, etc.
+        </item>
+        <item name="C++">
+            C++ was first picked up in 2010, during an introductory course to game development
+            hosted by Digipen Singapore. Since then, application of C++ has expanded beyond game development
+            to areas such as graphics programming in OpenGL.
+        </item>
+        <item name="HTML5">
+            HTML5 was first introduced in the late 2010s, however, proper understanding of HTML5
+            was only achieved in 2016.
+        </item>
+        <item name="CSS3">
+            CSS3 was first introduced alongside HTML5 in the late 2010s. Similarly, proficiency in CSS3
+            only developed in 2016.
+        </item>
+        <item name="JavaScript">
+            JavaScript was picked up in 2016, being one of the tested components
+            in the WorldSkills Singapore competition. JavaScript remains a core component in most,
+            if not all, web development projects to date.
+        </item>
+        <item name="PHP">
+            PHP was picked up in 2015, being another tested component in the WorldSkills Singapore competition.
+            Use of PHP in web development has increased dramatically since,
+            serving as a core component in larger web applications.
+        </item>
+        <item name="SQL">
+            SQL was picked up in 2015, first used in a school subject, Database and Information Systems.
+            Use of SQL then expanded to the WorldSkills Singapore competition.
+        </item>
+    </marquee>
+    <marquee type="framework">
+        <item name="Bootstrap">
+            Bootstrap was picked up in 2016 as a quick way to create decent looking layouts for the web.
+            Since then, with increased proficiency in HTML and CSS,
+            Bootstrap has seen less use in web development projects.
+        </item>
+        <item name="jQuery">
+            jQuery was picked up in 2016, being a tested skill in the WorldSkills Singapore competition.
+            Since then, jQuery has been used for many web projects,
+            both pertaining WorldSkills as well as external projects.
+        </item>
+        <item name="Laravel 5.2">
+            Laravel 5.2 was picked up in 2016, being yet another tested skill in the WorldSkills Singapore competition.
+            Although many intricacies of the framework are still yet to be discovered,
+            proficiency in Laravel has reached the point
+            where it has proven to be a powerful asset for websites and web applications.
+        </item>
+        <item name="OpenGL">
+            OpenGL was picked up in 2016 as a library used in school curriculum
+            for the subjects Game Math and Physics, and Graphics Programming.
+        </item>
+    </marquee>
+    <marquee type="program">
+        <item name="Unity">
+            Unity was first picked up in 2015, and has become the primary choice of game engine for game development.
+            Since then, several games made with Unity have been published on various platforms.
+        </item>
+        <item name="GameMaker">
+            GameMaker - as well as its successor GameMaker Studio - was picked up in 2013.
+            Initially using the drag-and-drop method, and later using primarily Game Maker Language (GML),
+            GameMaker served as a tool for creating several unpublished game prototypes.
+        </item>
+        <item name="FL Studio">
+            FL Studio has been and is still being used as the go-to program for music composition.
+            Although there is still much to learn, several songs have already been composed
+            and published on Soundcloud or used in various games.
+        </item>
+        <item name="Adobe Photoshop">
+            Adobe Photoshop is the primary tool used for image editing and manipulation.
+        </item>
+        <item name="Adobe Illustrator">
+            Adobe Illustrator is the de facto standard for creating vector illustrations.
+            Illustrator has been used in the past to create graphics for various games, artwork, websites, etc.
+        </item>
+        <item name="Blender 3D">
+            Blender 3D was picked up as a hobby in 2012.
+            Blender remains as the primary tool for creating 3D art,
+            even despite the introduction of Autodesk Maya and Cinema 4D.
+        </item>
+        <item name="Autodesk Maya">
+            Autodesk Maya was picked up in 2016 as a component of a school subject.
+            Maya was used for several school subjects during enrolment in Temasek Polytechnic.
+        </item>
+        <item name="Autodesk Mudbox">
+            Autodesk Mudbox was used in conjunction with Autodesk Maya for 3D texturing in 2016.
+            Mudbox was used once for a school assignment in the subject Game Texture, Lighting and Animation.
+        </item>
+        <item name="Cinema 4D">
+            Cinema 4D was picked up in 2013 as part of a school subject, Creative 3D Animation.
+            Cinema 4D was used in the creation of a short animation coursework,
+            which is unfortunately no longer available for viewing.
+        </item>
+    </marquee>
+</marquees>
