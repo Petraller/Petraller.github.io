@@ -158,6 +158,133 @@ Marquee.prototype.handlers = function ()
 
 // MARQUEE END
 
+// CAROUSEL BEGIN
+
+function Carousel(id)
+{
+    this.dom = $("#" + id)[0];
+    this.domLeft = null;
+    this.domNav = null;
+
+    this.index = 0;
+
+    this.content = null;
+
+    this.nextTimer = 0;
+    this.nextTime = 8000;
+}
+
+Carousel.prototype.init = function (data)
+{
+    $(this.dom).empty();
+
+    // Regenerate structure
+    var append = $(
+        '<div class="carousel-previous">&lsaquo;</div>' +
+        '<div class="carousel-next">&rsaquo;</div>' +
+        '<div class="carousel-nav"></div>' +
+        '<div class="carousel-content"><div class="carousel-left"></div></div>');
+    $(this.dom).append(append);
+    this.domLeft = $('.carousel-left')[0];
+    this.domNav = $('.carousel-nav')[0];
+
+    // Create items
+    this.content = [];
+    var index = 0;
+    for (var i in data)
+    {
+        // Create dom
+        var item = i;
+        var info = data[i];
+        var newDom = $("<a class='carousel-item'></a>");
+        var newImg = $("<img>");
+        $(newImg).attr('src', './img/' + info['image']);
+        $(newDom).append(newImg).css({'left': (index++ * 100) + '%'}).attr('href', info['link']);
+        $(this.dom).find('.carousel-left').append(newDom);
+
+        // Create pagination
+        var newPageDom = $("<div class='carousel-nav-page'>&bull;</div>");
+        $(this.dom).find('.carousel-nav').append(newPageDom);
+
+        // Add to content
+        this.content.push(newDom);
+    }
+
+    // Active page 1
+    $(this.dom).find('.carousel-nav-page').eq(0).addClass('carousel-nav-page-active');
+
+    this.handlers();
+};
+
+Carousel.prototype.update = function (dt)
+{
+    this.nextTimer += dt;
+    if (this.nextTimer >= this.nextTime)
+    {
+        this.next();
+    }
+};
+
+Carousel.prototype.previous = function ()
+{
+    // Increment
+    this.index = (this.index + this.content.length - 1) % this.content.length;
+
+    this.updateContent();
+};
+
+Carousel.prototype.next = function ()
+{
+    // Increment
+    this.index = (this.index + 1) % this.content.length;
+
+    this.updateContent();
+};
+
+Carousel.prototype.changePage = function (index)
+{
+    // Set
+    this.index = index % this.content.length;
+
+    this.updateContent();
+};
+
+Carousel.prototype.updateContent = function ()
+{
+    $(this.domLeft).css({
+        'left': (-this.index * 100) + '%'
+    });
+    $(this.domNav).find('.carousel-nav-page')
+        .removeClass('carousel-nav-page-active')
+        .eq(this.index).addClass('carousel-nav-page-active');
+
+    // Reset next timer
+    this.nextTimer = 0;
+};
+
+Carousel.prototype.handlers = function ()
+{
+    var foo = this;
+    $(this.dom).find('.carousel-content').click(function (e)
+    {
+
+    });
+    $(this.dom).find('.carousel-nav-page').click(function (e)
+    {
+        foo.changePage($(this).index());
+    });
+    $(this.dom).find('.carousel-previous').click(function (e)
+    {
+        foo.previous();
+    });
+    $(this.dom).find('.carousel-next').click(function (e)
+    {
+        foo.next();
+    });
+};
+
+// CAROUSEL END
+
 // BANNER START
 
 banner = {
@@ -173,14 +300,6 @@ banner = {
         {
             'text': "Hi",
             'duration': 2000,
-        },
-        {
-            'text': "Nice of you to stop by petraller.github.io",
-            'duration': 3000,
-        },
-        {
-            'text': "Development in progress :)",
-            'duration': 3000,
         },
         {
             'text': "I'm <span class='highlight-dark'>Petraller</span>",
@@ -234,10 +353,26 @@ banner = {
         }, banner.content[0]['duration']);
 
         // On click
-        $(banner.dom).click(function (e)
-        {
-            banner.next();
-        });
+        $(banner.dom)
+            .mousedown(function (e)
+            {
+                if (e.button == 0)
+                    banner.next();
+                else if (e.button == 2)
+                    banner.previous();
+            })
+            .contextmenu(function (e)
+            {
+                return false;
+            });
+    },
+
+    previous: function ()
+    {
+        // Decrement
+        banner.index = (banner.index + banner.content.length - 1) % banner.content.length;
+
+        banner.updateBanner();
     },
 
     next: function ()
@@ -245,6 +380,11 @@ banner = {
         // Increment
         banner.index = (banner.index + 1) % banner.content.length;
 
+        banner.updateBanner();
+    },
+
+    updateBanner: function ()
+    {
         // Move texts
         $(banner.domBannerTop).css({
             'top': (-banner.index * banner.spacingInterval) + "%",
@@ -280,10 +420,16 @@ var app = {
         program: null,
     },
 
+    carousels: {
+        games: null,
+    },
+
     // Initialise
     init: function ()
     {
         app.initMarquees();
+
+        app.initCarousels();
 
         banner.init();
 
@@ -316,8 +462,47 @@ var app = {
                     });
 
                     // Init marquee with data
+                    if (type == 'framework')
+                        app.marquees[type].iterations = 3;
                     app.marquees[type].init(data);
                 });
+            }
+        });
+    },
+
+    initCarousels: function ()
+    {
+        // Load game data
+        $.ajax({
+            url: "./files/Games.xml",
+            method: "GET",
+            success: function (e)
+            {
+                app.carousels.games = new Carousel('carousel-games');
+                var data = {};
+                $(e).find("game").each(function (index, value)
+                {
+                    // Add game
+                    var game = {};
+                    var name = $(value).attr('name');
+
+                    // Add data
+                    game['year'] = $(value).find('year').text();
+                    game['engine'] = $(value).find('engine').text();
+                    game['platform'] = $(value).find('platform').text();
+                    game['description'] = $(value).find('description').text();
+                    game['link'] = $(value).find('link').text();
+                    game['image'] = $(value).find('image').text();
+                    game['contributions'] = [];
+                    $(value).find('role').each(function (index, value)
+                    {
+                        game['contributions'].push($(value).text());
+                    });
+
+                    // Append new game
+                    data[name] = game;
+                });
+                app.carousels.games.init(data);
             }
         });
     },
@@ -328,6 +513,11 @@ var app = {
         {
             var marquee = app.marquees[i];
             marquee.update(dt);
+        }
+        for (var i in app.carousels)
+        {
+            var carousel = app.carousels[i];
+            carousel.update(dt);
         }
     },
 };
