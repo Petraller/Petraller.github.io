@@ -27,3 +27,7 @@ header_image: https://placehold.co/1920x240/
 ```
 
 You may replace the title, tagline, tile_image, and header_image with text/images of your choice.
+
+## Deployment
+
+Deploy via GitHub Pages by cloning this repository to your GitHub Pages repository (i.e. `yareyareyaze@github.io`).
