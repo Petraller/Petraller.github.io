@@ -1,0 +1,36 @@
+---
+layout: default
+title: Home
+---
+
+<section id="hero">
+    <img id="hero-bg" src="{{ site.data.hero.image }}" alt="">
+    <div id="hero-inner" class="container">
+        <h3 id="hero-salutation">Hello! I'm</h3>
+        <h1 id="hero-name">{{ site.data.hero.name }}</h1>
+        <h2 id="hero-title">{{ site.data.hero.title }}</h2>
+        <p id="hero-about">{{ site.data.hero.about }}</p>
+    </div>
+</section>
+<section id="projects">
+    <!-- {% for item in site.data.projects %}
+    {% include project_tile.html title=item.name tagline=item.tagline image=item.image link=item.link %}
+    {% endfor %} -->
+    {% for post in site.posts %}
+    {% include project_tile.html title=post.title tagline=post.tagline image=post.tile_image url=post.url %}
+    {% endfor %}
+</section>
+<section id="contact">
+    <div class="container section-inner">
+        <aside class="section-header">
+            <h1><i class="fa-regular fa-address-card"></i> Contact Me</h1>
+        </aside>
+        <main class="section-body">
+            {% for item in site.data.contacts %}
+            <div class="contact">
+                <i class="{{ item.icon }}"></i> {{ item.value }}
+            </div>
+            {% endfor %}
+        </main>
+    </div>
+</section>
