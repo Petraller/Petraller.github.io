@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+    Designed and developed by Clarence "Petraller" Tay
+    Contact: me@petraller.com
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title }} - {{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/assets/css/regular.min.css">
+    <link rel="stylesheet" href="/assets/css/solid.min.css">
+    <link rel="stylesheet" href="/assets/css/brands.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+    {% include header.html %}
+    {{ content }}
+    {% include footer.html %}
+</body>
+
+</html>
